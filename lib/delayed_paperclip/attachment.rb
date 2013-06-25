@@ -41,6 +41,7 @@ module DelayedPaperclip
         self.post_processing = true
         reprocess!(*delayed_options[:only_process])
         self.job_is_processing = false
+        instance.send(:"after_#{name}_processing") if instance.respond_to? :"after_#{name}_processing"
       end
 
       def processing_image_url
